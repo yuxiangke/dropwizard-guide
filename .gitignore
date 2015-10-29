@@ -1,0 +1,30 @@
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Eclipse
+.project
+.classpath
+
+# Mac
+.DS_Store
+
+# Maven
+log/
+target/
+
+*.bz2
+
+dependency-reduced-pom.xml
+
+log/
+target/
+bundles/
+
+src/main/resources/reporting-api.yml
+
+*.prefs
+
+*.log
+/bin/

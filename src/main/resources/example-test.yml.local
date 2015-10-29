@@ -1,0 +1,154 @@
+server:
+    type: default
+    maxThreads: 30
+    maxQueuedRequests: 2048
+    adminMaxThreads: 5
+    adminMinThreads: 1
+
+
+#to use for uris in responses.
+loadbalancerAddress: http://localhost:8080
+
+maxDateRangeDaysTimeseries: 180
+
+maxDateRangeSummaryInYears: 1
+
+authenticationServerAddress: http://dev-stats-reporting-api01.us-east-1b.public:8083/oauth/token_details
+
+# Number of seconds a token will be stored in cache to prevent concurrent request with same token (max oursql timeout = 120s)
+requestExpireTime: 120
+
+
+
+# Used for Couchbase DAO configuration
+caching_on: false
+
+couchbaseServerNodes: http://dev-rtb-couchbase10.us-east-1b.public:8091/pools,http://dev-rtb-couchbase11.us-east-1b.public:8091/pools
+
+couchbaseBucket: default
+
+oursqlCacheTTL: 3600
+
+# Database settings.
+
+promo2:
+    driverClass: com.mysql.jdbc.Driver 
+
+    user: inplay_promo 
+
+    password: f0nekoHqAi 
+
+    url: jdbc:mysql://dev-oltp01:3306/promo2
+    
+    validationQuery: "SELECT 1"
+ 
+    # any properties specific to your JDBC driver:
+    properties:
+        charSet: UTF-8
+
+    # the maximum amount of time to wait on an empty pool before throwing an exception
+    maxWaitForConnection: 1s
+
+    # the minimum number of connections to keep open
+    minSize: 5
+
+    # the maximum number of connections to keep open
+    maxSize: 30
+
+    # whether or not idle connections should be validated
+    checkConnectionWhileIdle: false
+
+    checkConnectionOnBorrow: true
+    
+    # the amount of time to sleep between runs of the idle connection validation, abandoned cleaner and idle pool resizing
+    evictionInterval: 10s
+
+    # the minimum amount of time an connection must sit idle in the pool before it is eligible for eviction
+    minIdleTime: 1 minute
+
+oursql:
+  # the name of your JDBC driver
+  driverClass: com.tubemogul.oursql.ossr.agent.jdbc.Driver
+
+  # the username
+  oursqlUser: inplay 
+
+  # the password
+  oursqlPwd: inplay 
+
+  # the JDBC URL
+  ### url: jdbc:mysql://dev-userdb-mst01/oursql
+  oursqlUrl: jdbc:oursql://oursql;databaseName=inplay
+
+
+  # initial size of database connection pool
+  initialSize: 10
+
+  # minimum number of database connection pool threads
+  minIdle: 5
+
+  # max number of database connection pool threads
+  maxActive: 50
+
+  # The maximum number of milliseconds that the pool will wait (when there are no available connections)
+  # for a connection to be returned before throwing an exception, or -1 to wait indefinitely.
+  maxWait: 30000
+
+  # pool prepared statements
+  poolPreparedStatements: true
+
+  validationQuery: select our_dual from our_dual
+
+  maxOpenPreparedStatements: 50
+
+  # If a connection is abandoned, log a exception
+  logAbandoned: true
+
+
+# Logging settings.
+logging:
+
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+  level: INFO
+
+  # Logger-specific levels.
+  loggers:
+
+    # Sets the level for 'com.example.app' to DEBUG.
+    com.tubemogul.api: DEBUG
+
+  appenders:
+    - type: console
+
+server:
+    applicationConnectors:
+    - type: http
+      port: 8080 
+    adminConnectors:
+    - type: http
+      port: 8081 
+
+nagios.nscaHost: mgmt01
+nagios.nscaPort: 5667
+nagios.nscaPass: r5gU8ma43Yz
+
+ganglia.port: 8649
+ganglia.host: dev-mgmt01
+
+fees.box: http://dev-api-segment-management01.us-east-1b.public:8080/
+
+auth:
+    dummy_on: false
+    account_id: 1
+    scope: application:tm-ui
+    token: fake-token
+    token_type: dummy
+    admin: true
+    super_user: false
+    expires_in: 7200
+    
+fees_api:
+    host: http://dev-api-segment-management01.us-east-1b.public:8080/
+    partner_id: f7a342b291ae48ba67efb36d77b7fc4f873dc064
+    partner_key: 947935feb61512b56c8b8a1109a1eda47ce94f32
+
